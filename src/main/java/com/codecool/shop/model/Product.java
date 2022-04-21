@@ -1,46 +1,91 @@
 package com.codecool.shop.model;
 
-import java.math.BigDecimal;
-import java.util.Currency;
+import org.hibernate.annotations.Type;
 
-public class Product extends BaseModel {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
-    private BigDecimal defaultPrice;
-    private Currency defaultCurrency;
+@Entity
+@Table(name = "product")
+public class Product implements Serializable {
+
+    private static final long serialVersionUID = 1234567L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //dodawanie kolejnych id na poziomie tabeli
+    private int productId;
+    private String productName;
+    private double defaultPrice;
+    private String currency;
+    @Type(type = "text")
+    private String description;
+    @ManyToMany
+    private List<Supplier> supplier;
+    @ManyToOne
     private ProductCategory productCategory;
-    private Supplier supplier;
 
-
-    public Product(String name, BigDecimal defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
-        super(name, description);
-        this.setPrice(defaultPrice, currencyString);
-        this.setSupplier(supplier);
-        this.setProductCategory(productCategory);
+    public Product(int productId, String productName,
+                   double defaultPrice, String currency,
+                   String description, List<Supplier> supplier,
+                   ProductCategory productCategory) {
+        this.productId = productId;
+        this.productName = productName;
+        this.defaultPrice = defaultPrice;
+        this.currency = currency;
+        this.description = description;
+        this.supplier = supplier;
+        this.productCategory = productCategory;
     }
 
-    public BigDecimal getDefaultPrice() {
+    public Product() {}
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public double getDefaultPrice() {
         return defaultPrice;
     }
 
-    public void setDefaultPrice(BigDecimal defaultPrice) {
+    public void setDefaultPrice(double defaultPrice) {
         this.defaultPrice = defaultPrice;
     }
 
-    public Currency getDefaultCurrency() {
-        return defaultCurrency;
+    public String getCurrency() {
+        return currency;
     }
 
-    public void setDefaultCurrency(Currency defaultCurrency) {
-        this.defaultCurrency = defaultCurrency;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
-    public String getPrice() {
-        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
+    public String getDescription() {
+        return description;
     }
 
-    public void setPrice(BigDecimal price, String currency) {
-        this.defaultPrice = price;
-        this.defaultCurrency = Currency.getInstance(currency);
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Supplier> getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(List<Supplier> supplier) {
+        this.supplier = supplier;
     }
 
     public ProductCategory getProductCategory() {
@@ -49,31 +94,18 @@ public class Product extends BaseModel {
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-        this.supplier.addProduct(this);
     }
 
     @Override
     public String toString() {
-        return String.format("id: %1$d, " +
-                        "name: %2$s, " +
-                        "defaultPrice: %3$f, " +
-                        "defaultCurrency: %4$s, " +
-                        "productCategory: %5$s, " +
-                        "supplier: %6$s",
-                this.id,
-                this.name,
-                this.defaultPrice,
-                this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName());
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", defaultPrice='" + defaultPrice + '\'' +
+                ", currency='" + currency + '\'' +
+                ", description='" + description + '\'' +
+                ", supplier=" + supplier +
+                ", productCategory=" + productCategory +
+                '}';
     }
 }

@@ -1,36 +1,55 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-public class Supplier extends BaseModel {
-    private List<Product> products;
+@Entity
+public class Supplier implements Serializable {
 
-    public Supplier(String name, String description) {
-        super(name);
-        this.products = new ArrayList<>();
+    public Supplier(
+            Integer supplier_id,
+            String supplier_name,
+            String description) {
+        this.supplier_id = supplier_id;
+        this.supplier_name = supplier_name;
+        this.description = description;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer supplier_id;
+    private String supplier_name;
+    private String description;
+
+    public Supplier() {
+
     }
 
-    public List<Product> getProducts() {
-        return this.products;
+    public String getSupplier_name() {
+        return supplier_name;
     }
 
-    public void addProduct(Product product) {
-        this.products.add(product);
+    public void setSupplier_name(String supplier_name) {
+        this.supplier_name = supplier_name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return String.format("id: %1$d, " +
-                        "name: %2$s, " +
-                        "description: %3$s",
-                this.id,
-                this.name,
-                this.description
-        );
+        return "Supplier{" +
+                "supplier_id=" + supplier_id +
+                ", supplier_name='" + supplier_name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
