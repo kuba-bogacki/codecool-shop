@@ -1,48 +1,47 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-public class ProductCategory extends BaseModel {
-    private String department;
-    private List<Product> products;
+@Entity
+public class ProductCategory implements Serializable {
 
-    public ProductCategory(String name, String department, String description) {
-        super(name);
-        this.department = department;
-        this.products = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+
+    public ProductCategory(String name) {
+        this.name = name;
     }
 
-    public String getDepartment() {
-        return department;
+    public ProductCategory() {
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public int getId() {
+        return id;
     }
 
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return this.products;
+    public String getName() {
+        return name;
     }
 
-    public void addProduct(Product product) {
-        this.products.add(product);
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "id: %1$d," +
-                        "name: %2$s, " +
-                        "department: %3$s, " +
-                        "description: %4$s",
-                this.id,
-                this.name,
-                this.department,
-                this.description);
+        return "ProductCategory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
