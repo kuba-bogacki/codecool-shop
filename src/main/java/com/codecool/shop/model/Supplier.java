@@ -1,22 +1,10 @@
 package com.codecool.shop.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Supplier implements Serializable {
-
-    public Supplier(
-            Integer supplier_id,
-            String supplier_name,
-            String description) {
-        this.supplier_id = supplier_id;
-        this.supplier_name = supplier_name;
-        this.description = description;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +12,21 @@ public class Supplier implements Serializable {
     private String supplier_name;
     private String description;
 
-    public Supplier() {
+    public Supplier(
+            String supplier_name,
+            String description) {
+        this.supplier_name = supplier_name;
+        this.description = description;
+    }
 
+    public Supplier() {}
+
+    public Integer getSupplier_id() {
+        return supplier_id;
+    }
+
+    public void setSupplier_id(Integer supplier_id) {
+        this.supplier_id = supplier_id;
     }
 
     public String getSupplier_name() {

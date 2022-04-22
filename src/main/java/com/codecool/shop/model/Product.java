@@ -20,14 +20,14 @@ public class Product implements Serializable {
     private String currency;
     @Type(type = "text")
     private String description;
-    @ManyToMany
-    private List<Supplier> supplier;
+    @ManyToOne
+    private Supplier supplier;
     @ManyToOne
     private ProductCategory productCategory;
 
     public Product(int productId, String productName,
                    double defaultPrice, String currency,
-                   String description, List<Supplier> supplier,
+                   String description, Supplier supplier,
                    ProductCategory productCategory) {
         this.productId = productId;
         this.productName = productName;
@@ -80,11 +80,11 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public List<Supplier> getSupplier() {
+    public Supplier getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(List<Supplier> supplier) {
+    public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 

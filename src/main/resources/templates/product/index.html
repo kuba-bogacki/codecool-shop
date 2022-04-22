@@ -25,44 +25,50 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
-</head>
+    <style>
+        body {background-image: url("https://cdn.eso.org/images/wallpaper4/eso0932a.jpg")}
+    </style>
 
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
+</head>
 <body>
 
 <div class="jumbotron text-center">
+
     <h1>Codecool Shop</h1>
-</div>
 
-<div class="btn-group" role="group" aria-label="Basic example" th:each="prod: ${products}">
-    <button type="button" class="btn btn-secondary" th:text="${prod.productCategory.getName()}"
-            th:href="@{/find-by-category/${prod.productCategory.getName()}}">
-        Category Title</button>
-</div>
+    <h3>Category</h3>
+    <div class="btn-group" role="group" aria-label="Basic example" th:each="prod_cat: ${products_category}">
+        <a class="btn btn-secondary" th:text="${prod_cat.getName()}"
+           th:href="'/find-by-category/' + ${prod_cat.getId()}">Product Category</a>
+    </div>
 
-<div class="btn-group" role="group" aria-label="Basic example" th:each="prod: ${products}">
-    <button type="button" class="btn btn-secondary" th:text="${prod.getSupplierName()}"
-            th:href="@{/find-by-supplier/${prod.getSupplierName()}}">
-        Supplier</button>
+    <h3>Brand</h3>
+    <div class="btn-group" role="group" aria-label="Basic example" th:each="supp: ${suppliers}">
+        <a class="btn btn-secondary" th:text="${supp.getSupplier_name()}"
+           th:href="'/find-by-supplier/' + ${supp.getSupplier_id()}">Supplier</a>
+    </div>
+
 </div>
 
 <div class="container">
-
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod: ${products}">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.getProductId()} + '.jpg'" alt="" />
                 <div class="card-header">
-                    <strong th:text="${prod.getProductCategoryName()}">Category Title</strong>
+                    <strong th:text="${prod.productCategory.getName()}">Category Title</strong>
                     <h4 class="card-title" th:text="${prod.getProductName()}">Product name</h4>
                     <p class="card-text" th:text="${prod.getDescription()}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
                         <p class="lead" th:text="${prod.getDefaultPrice()}">100 USD</p>
+                        <p class="lead" th:text="${prod.getCurrency()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#" th:value="id='product-id-' + ${prod.getProductId()}">Add to basket</a>
+                        <a class="btn btn-success" href="#" th:value="'product-id-' + ${prod.getProductId()}">Add to basket</a>
                     </div>
                 </div>
             </div>

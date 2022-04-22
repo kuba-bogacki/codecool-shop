@@ -19,18 +19,9 @@ public class ProductController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String findAllProducts(Model model) {
         model.addAttribute("products", productService.listAll());
+        model.addAttribute("products_category", productService.listAllProductsCategory());
+        model.addAttribute("suppliers", productService.listAllSuppliers());
         return "product/index";
     }
 
-    @RequestMapping(value = "/find-by-category/{category}", method = RequestMethod.GET)
-    public String findByCategory(Model model, @PathVariable String category) {
-        model.addAttribute("products", productService.listAll());
-        return "product/index";
-    }
-
-    @RequestMapping(value = "/find-by-supplier/{supplier}", method = RequestMethod.GET)
-    public String findBySupplier(Model model, @PathVariable String supplier) {
-        model.addAttribute("products", productService.listAll());
-        return "product/index";
-    }
 }
