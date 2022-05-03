@@ -3,8 +3,7 @@ package com.codecool.shop.service;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.view.ProductRepository;
-import com.sun.xml.bind.v2.model.core.ID;
+import com.codecool.shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

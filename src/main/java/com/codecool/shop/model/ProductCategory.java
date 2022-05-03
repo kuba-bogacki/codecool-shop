@@ -4,40 +4,41 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "product_category")
 public class ProductCategory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    private int productCategoryId;
+    private String productCategoryName;
 
-    public ProductCategory(String name) {
-        this.name = name;
+    public ProductCategory(String productCategoryName) {
+        this.productCategoryName = productCategoryName;
     }
 
     public ProductCategory() {}
 
-    public int getId() {
-        return id;
+    public int getProductCategoryId() {
+        return productCategoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductCategoryId(int productCategoryId) {
+        this.productCategoryId = productCategoryId;
     }
 
-    public String getName() {
-        return name;
+    public String getProductCategoryName() {
+        return productCategoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductCategoryName(String productCategoryName) {
+        this.productCategoryName = productCategoryName;
     }
 
     @Override
     public String toString() {
         return "ProductCategory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "productCategoryId=" + productCategoryId +
+                ", productCategoryName='" + productCategoryName + '\'' +
                 '}';
     }
 }

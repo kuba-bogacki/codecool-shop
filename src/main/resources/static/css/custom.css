@@ -1,3 +1,7 @@
+/*body*/
+/*{*/
+/*    background-image: url("https://cdn.eso.org/images/wallpaper4/eso0932a.jpg")*/
+/*}*/
 .glyphicon {
     margin-right:5px;
 }
@@ -59,4 +63,30 @@
 .list-group-item-text
 {
     margin: 0 0 11px;
+}
+.basket-image
+{
+    position: absolute;
+    right: 20px;
+    top: auto;
+}
+.basket-image:hover
+{
+    transform: rotate(10deg);
+    transition: 1300ms;
+}
+.table
+{
+    background-color: -moz-mac-accentdarkshadow;
+    max-width: 750px;
+    position: center;
+    margin: auto;
+    border: 3px whitesmoke;
+    padding: 10px;
+}
+.login-page
+{
+    position: absolute;
+    left: 20px;
+    top: auto;
 }
