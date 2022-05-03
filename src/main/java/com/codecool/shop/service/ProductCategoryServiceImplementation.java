@@ -1,12 +1,10 @@
 package com.codecool.shop.service;
 
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.view.ProductCategoryRepository;
+import com.codecool.shop.repository.ProductCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +21,7 @@ public class ProductCategoryServiceImplementation implements ProductCategoryServ
     @Override
     public List<Product> listByCategory(Integer id) {
         List<Product> allProductsByCategory = productCategoryRepository
-                .findByProductCategoryId(id)
-                .stream()
-                .collect(Collectors.toList());
+                .findByProductCategoryId(id);
         return allProductsByCategory;
     }
 }

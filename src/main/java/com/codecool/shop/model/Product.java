@@ -21,15 +21,16 @@ public class Product implements Serializable {
     @Type(type = "text")
     private String description;
     @ManyToOne
+    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
     @ManyToOne
+    @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
 
-    public Product(int productId, String productName,
+    public Product(String productName,
                    double defaultPrice, String currency,
                    String description, Supplier supplier,
                    ProductCategory productCategory) {
-        this.productId = productId;
         this.productName = productName;
         this.defaultPrice = defaultPrice;
         this.currency = currency;

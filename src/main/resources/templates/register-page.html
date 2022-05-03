@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
@@ -7,7 +7,7 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
+    <title>User Registration</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -20,7 +20,7 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -50,49 +50,46 @@
             <img class="basket-image" src="/img/shopping_cart_icon.jpg" width="110" height="110" alt="" />
         </div>
     </a>
-    <a href="/">
-        <h1>Codecool Shop</h1>
-    </a>
-    <h3>Category</h3>
-    <div class="btn-group" role="group" aria-label="Basic example" th:each="prod_cat: ${products_category}">
-        <a class="btn btn-secondary" th:text="${prod_cat.getProductCategoryName()}"
-           th:href="'/find-by-category/' + ${prod_cat.getProductCategoryId()}">Product Category</a>
-    </div>
-    <h3>Brand</h3>
-    <div class="btn-group" role="group" aria-label="Basic example" th:each="supp: ${suppliers}">
-        <a class="btn btn-secondary" th:text="${supp.getSupplierName()}"
-           th:href="'/find-by-supplier/' + ${supp.getSupplierId()}">Supplier</a>
-    </div>
+    <a href="/"><h1>Codecool Shop</h1></a>
 </div>
 
-<div class="container">
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod: ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.getProductId()} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <strong th:text="${prod.productCategory.getProductCategoryName()}">Category Title</strong>
-                    <h4 class="card-title" th:text="${prod.getProductName()}">Product name</h4>
-                    <p class="card-text" th:text="${prod.getDescription()}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getDefaultPrice()}">100 USD</p>
-                        <p class="lead" th:text="${prod.getCurrency()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn-success" th:attr="data-product-id=${prod.getProductId()}">Add to basket</a>
-                    </div>
+<div class="container text-center">
+    <div>
+        <h1>Sign Up</h1>
+    </div>
+    <form th:action="@{/process-register}" th:object="${customer}"
+          method="post" style="max-width: 600px; margin: 0 auto;">
+        <div class="m-3">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">E-mail: </label>
+                <div class="col-8">
+                    <input type="email" th:field="*{customerEmail}" class="form-control" required />
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Name: </label>
+                <div class="col-8">
+                    <input type="text" th:field="*{customerName}" class="form-control"
+                           required minlength="2" maxlength="20"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Password: </label>
+                <div class="col-8">
+                    <input type="password" th:field="*{password}" class="form-control"
+                           required minlength="6" maxlength="10"/>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
-<div th:replace="footer.html :: copy"></div>
-
-
-<script type="text/javascript" src="/js/collectProducts.js"></script>
-<script type="text/javascript" src="/js/main.js"></script>
 </body>
 </html>
