@@ -3,6 +3,10 @@ let dataHandler = {
         const response = await apiGet(`/show-basket/add/${productId}`);
         return response;
     },
+    deleteProductFromBasket: async function(productId) {
+        const response = await apiDelete(`/show-basket/delete/${productId}`);
+        return response;
+    }
 };
 
 async function apiGet(url) {
@@ -10,6 +14,15 @@ async function apiGet(url) {
         method: "GET",
     });
     let data = await response.text();
+    return data;
+}
+
+async function apiDelete(url) {
+    let response = await fetch(url, {
+        method: "DELETE",
+    });
+    let data = await response.text();
+    console.log("działa" + data);
     return data;
 }
 

@@ -45,4 +45,14 @@ public class BasketController {
         }
         return modalInformation;
     }
+
+    @RequestMapping(value = "/show-basket/delete/{productId}", produces = "application/json", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String deleteProductFromBasket(@PathVariable Integer productId, Authentication authentication) {
+        String modalInformation = "";
+        Customer customer = customerService.getCurrentlyLoggedInCustomer(authentication);
+        basketService.removeProductFromBasket(productId, customer);
+        modalInformation = "Product successfully removed from your basket";
+        return modalInformation;
+    }
 }

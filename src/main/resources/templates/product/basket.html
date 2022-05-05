@@ -55,6 +55,13 @@
     <a href="/"><h1>Codecool Shop</h1></a>
 </div>
 
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <p class="modal-text"></p>
+        <button class="close btn-danger">Ok</button>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="text-center">
         <h1>List of Products</h1>
@@ -65,8 +72,8 @@
                 <div class="row border rounded">
                     <div class="col-1">
 <!--                        <div>[[${status.count}]]</div>-->
-                        <img src="http://placehold.it/400x250/000/fff"
-                             th:attr="src='/img/trash_bin.jpg'"
+                        <img class="delete-icon" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/img/trash_bin.jpg', data-product-id=${item.getProduct().getProductId()}"
                              width="20" height="25"/>
                     </div>
                     <div class="col-3">
@@ -88,8 +95,8 @@
                             <span class="h4 subtotal-amount" th:text="${item.getSubTotal()}">Subtotal</span>
                         </div>
                     </div>
+                    <div class="row m-1 bread-crumbs">&nbsp;</div>
                 </div>
-                <div class="row m-1">&nbsp;</div>
             </th:block>
         </div>
 
@@ -98,7 +105,7 @@
                 <span class="h3">Estimated total:</span>
             </div>
             <div class="mt-2">
-                <span class="h2 total-amount">[Total amount]</span>
+                <span class="h2 total-amount">Total amount</span>
             </div>
             <div class="mt-2">
                 <button class="btn btn-danger p-3 mt-2">Buy now</button>
@@ -107,7 +114,9 @@
     </div>
 </div>
 
+<script type="text/javascript" src="/js/dataHandler.js"></script>
 <script type="text/javascript" src="/js/basketData.js"></script>
+<script type="text/javascript" src="/js/mainBasket.js"></script>
 
 </body>
 </html>

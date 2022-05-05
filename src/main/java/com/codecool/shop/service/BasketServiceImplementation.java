@@ -7,6 +7,7 @@ import com.codecool.shop.repository.BasketRepository;
 import com.codecool.shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,7 +43,12 @@ public class BasketServiceImplementation implements BasketService {
             basket.setQuantity(quantity);
             basket.setCustomer(customer);
         }
-        System.out.println(basket);
         basketRepository.save(basket);
+    }
+
+    @Override
+    @Transactional
+    public void removeProductFromBasket(Integer productId, Customer customer) {
+        basketRepository.deleteByProduct_ProductIdAndCustomer_CustomerId(productId, customer.getCustomerId());
     }
 }
