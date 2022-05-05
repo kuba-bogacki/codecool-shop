@@ -19,6 +19,7 @@ let collectProductsButtons = {
         }
         let productId = clickEvent.target.dataset.productId;
         console.log(productId);
+        console.log(clickEvent.target.dataset.productId);
         modalText.innerHTML = await dataHandler.addNewProduct(productId);
         modal.style.display = "block";
     }

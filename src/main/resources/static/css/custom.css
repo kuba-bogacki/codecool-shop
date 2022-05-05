@@ -66,10 +66,10 @@
     right: 20px;
     top: auto;
 }
-.basket-image:hover
+.basket-image:hover, .delete-icon:hover
 {
-    transform: rotate(10deg);
-    transition: 1300ms;
+    transform: rotate(12deg);
+    transition: 1500ms;
 }
 .table
 {
@@ -86,9 +86,6 @@
     left: 20px;
     top: auto;
 }
-
-
-
 .modal
 {
     display: none;
@@ -110,6 +107,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 40%;
+    height: 20%;
 }
 .close
 {
