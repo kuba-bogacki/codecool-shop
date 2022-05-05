@@ -53,9 +53,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/customers")
-                .authenticated()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/show-basket").hasAnyAuthority("ROLE_USER")
                 .anyRequest()
                 .permitAll()
                 .and()

@@ -83,6 +83,10 @@ INSERT INTO product(currency, default_price, description, product_name, product_
 INSERT INTO product(currency, default_price, description, product_name, product_category_id, supplier_id) VALUES ('USD', 95.2, 'Venu 2 watch is equipped with advanced health monitoring functions', 'Garmin Venu 2', 4, 4);
 INSERT INTO product(currency, default_price, description, product_name, product_category_id, supplier_id) VALUES ('USD', 73.5, 'Supports global navigation satellite systems such as GPS and Galileo', 'Garmin Instinct', 4, 4);
 
+INSERT INTO basket(quantity, customer_id, product_id) VALUES (2, 5, 3);
+INSERT INTO basket(quantity, customer_id, product_id) VALUES (1, 5, 1);
+INSERT INTO basket(quantity, customer_id, product_id) VALUES (6, 5, 9);
+
 -- INSERT INTO product_supplier(description, supplier_name) VALUES ('Apple', 'Designs, manufactures and markets smartphones');
 -- INSERT INTO product_supplier(description, supplier_name) VALUES ('Lenovo', 'Leading personal technology companies, producing tablets');
 -- INSERT INTO product_supplier(description, supplier_name) VALUES ('Dell', 'One of the largest tech companies in the world');
