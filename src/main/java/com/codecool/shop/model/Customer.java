@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Customer implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
     @Column(nullable = false)
     private String customerName;

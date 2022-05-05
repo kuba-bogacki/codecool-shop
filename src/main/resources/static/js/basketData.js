@@ -1,9 +1,15 @@
-showLocalStorageList = function() {
-    let itemIntegerList = [];
-    let parsedBasket = JSON.parse(localStorage.getItem('productInBasket'));
-    for (let i = 0; i < parsedBasket.length; i++) {
-        itemIntegerList.push(parseInt(parsedBasket[i]));
-    }
-    console.log(itemIntegerList);
+function showBasketPrice() {
+    let basketPrice = document.querySelector(".total-amount");
+    basketPrice.innerHTML = this.initAmount() + " USD";
 }
-showLocalStorageList();
+
+function initAmount() {
+    let totalAmount = 0.0;
+    let subAmount = document.querySelectorAll(".subtotal-amount");
+    for (let i = 0; i < subAmount.length; i++) {
+        totalAmount += parseFloat(subAmount[i].innerHTML);
+    }
+    return totalAmount;
+}
+
+showBasketPrice();

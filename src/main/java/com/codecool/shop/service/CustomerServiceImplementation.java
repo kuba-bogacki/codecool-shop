@@ -1,12 +1,11 @@
 package com.codecool.shop.service;
 
 import com.codecool.shop.model.Customer;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.repository.CustomerRepository;
+import com.codecool.shop.security.CustomCustomerDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,4 +33,15 @@ public class CustomerServiceImplementation implements CustomerService {
         return allCustomers;
     }
 
+    @Override
+    public Customer getCurrentlyLoggedInCustomer(Authentication authentication) {
+        Customer customer = null;
+        System.out.println(authentication);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof CustomCustomerDetails) {
+            customer = ((CustomCustomerDetails)principal).getCustomer();
+        }
+        return customer;
+    }
 }

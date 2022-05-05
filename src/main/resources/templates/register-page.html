@@ -34,11 +34,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" th:href="@{/register}">Register</a>
-            <a class="nav-item nav-link active" th:href="@{/login}">Login</a>
+        <div class="navbar-nav" sec:authorize="isAuthenticated()">
             <a class="nav-item nav-link active" th:href="@{/customers}">All Customers</a>
             <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
+        </div>
+        <div class="navbar-nav" sec:authorize="isAnonymous()">
+            <a class="nav-item nav-link active" th:href="@{/register}">Register</a>
+            <a class="nav-item nav-link active" th:href="@{/login}">Login</a>
         </div>
     </div>
     <div sec:authorize="isAuthenticated()">Login as <span sec:authentication="name"></span></div>
@@ -80,7 +82,7 @@
                 <label class="col-4 col-form-label">Password: </label>
                 <div class="col-8">
                     <input type="password" th:field="*{password}" class="form-control"
-                           required minlength="6" maxlength="10"/>
+                           required minlength="6" maxlength="30"/>
                 </div>
             </div>
 

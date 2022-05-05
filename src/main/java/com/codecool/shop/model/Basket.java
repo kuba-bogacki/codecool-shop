@@ -58,6 +58,11 @@ public class Basket implements Serializable {
         this.quantity = quantity;
     }
 
+    @Transient
+    public float getSubTotal() {
+        return (float) (this.product.getDefaultPrice() * this.quantity);
+    }
+
     @Override
     public String toString() {
         return "Basket{" +
