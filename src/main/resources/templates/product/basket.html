@@ -71,7 +71,6 @@
             <th:block th:each="item, status: ${itemsList}">
                 <div class="row border rounded">
                     <div class="col-1">
-<!--                        <div>[[${status.count}]]</div>-->
                         <img class="delete-icon" src="http://placehold.it/400x250/000/fff"
                              th:attr="src='/img/trash_bin.jpg', data-product-id=${item.getProduct().getProductId()}"
                              width="20" height="25"/>
@@ -108,7 +107,9 @@
                 <span class="h2 total-amount">Total amount</span>
             </div>
             <div class="mt-2">
-                <button class="btn btn-danger p-3 mt-2">Buy now</button>
+                <a class="redirect-to-order" th:href="@{/order}">
+                    <button class="btn btn-success p-3 mt-2">Buy now</button>
+                </a>
             </div>
         </div>
     </div>

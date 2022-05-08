@@ -55,17 +55,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/show-basket").hasAnyAuthority("ROLE_USER")
+                .antMatchers("/show-basket", "/customers").hasAnyAuthority("ROLE_USER")
                 .anyRequest()
                 .permitAll()
                 .and()
                 .formLogin()
-                .usernameParameter("customerEmail")
-                .defaultSuccessUrl("/")
+                .loginPage("/login")
+                .usernameParameter("email")
                 .permitAll()
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
-                .permitAll();
+                .permitAll()
+                .and()
+                .rememberMe();
     }
 }

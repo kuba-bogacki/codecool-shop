@@ -2,7 +2,6 @@ package com.codecool.shop.service;
 
 import com.codecool.shop.model.Customer;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 

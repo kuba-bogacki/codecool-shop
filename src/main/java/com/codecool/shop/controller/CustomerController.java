@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 @Controller
 public class CustomerController {
 
@@ -16,6 +17,12 @@ public class CustomerController {
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginCustomer() {
+        return "login-page";
+    }
+
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerCustomer(Model model) {
