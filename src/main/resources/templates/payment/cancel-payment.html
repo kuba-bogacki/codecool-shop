@@ -7,7 +7,7 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>User Registration</title>
+    <title>Payment failure</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -56,38 +56,8 @@
 </div>
 
 <div class="container text-center">
-    <div>
-        <h1>Sign Up</h1>
-    </div>
-    <form th:action="@{/process-register}" th:object="${customer}"
-          method="post" style="max-width: 600px; margin: 0 auto;">
-        <div class="m-3">
-            <div class="form-group row">
-                <label class="col-4 col-form-label">E-mail:</label>
-                <div class="col-8">
-                    <input th:field="*{customerEmail}" type="email" name="email" class="form-control"
-                           required minlength="2" maxlength="30" placeholder="E-mail..."/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Name:</label>
-                <div class="col-8">
-                    <input th:field="*{customerName}" type="text" name="name" class="form-control"
-                           required minlength="2" maxlength="20" placeholder="Name..."/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Password:</label>
-                <div class="col-8">
-                    <input th:field="*{password}" type="password" name="password" class="form-control"
-                           required minlength="6" maxlength="30" placeholder="Password..."/>
-                </div>
-            </div>
-            <div>
-                <button type="submit" class="btn btn-success">Sign Up</button>
-            </div>
-        </div>
-    </form>
+    <h4>Payment failure!</h4>
+    <h3><a th:href="@{/}">Back to main page</a></h3>
 </div>
 
 </body>
