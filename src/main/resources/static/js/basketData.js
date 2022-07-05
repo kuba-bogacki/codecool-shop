@@ -8,6 +8,15 @@ let basketData = {
     showBasketPrice: function() {
         let basketPrice = document.querySelector(".total-amount");
         basketPrice.innerHTML = initAmount() + " USD";
+    },
+    changeQuantity: function() {
+        let decreaseButtons = document.querySelectorAll(".minusButton");
+        let raiseButtons = document.querySelectorAll(".plusButton");
+
+        for (let i = 0; i < decreaseButtons.length; i++) {
+            decreaseButtons[i].addEventListener("click", subtractQuantity);
+            raiseButtons[i].addEventListener("click", addQuantity);
+        }
     }
 }
 

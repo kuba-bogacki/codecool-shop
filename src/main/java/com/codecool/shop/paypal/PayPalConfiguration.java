@@ -23,7 +23,7 @@ public class PayPalConfiguration {
     @Autowired
     public PayPalConfiguration(
             @Value("${paypal.client.id:}") String clientId,
-            @Value("${paypal.client.secret:}") String clientSecret,
+            @Value("${paypal.secret.id:}") String clientSecret,
             @Value("${paypal.mode:}") String mode) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;

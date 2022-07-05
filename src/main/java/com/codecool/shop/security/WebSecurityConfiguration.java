@@ -18,12 +18,10 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private DataSource dataSource;
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public WebSecurityConfiguration(DataSource dataSource, CustomerRepository customerRepository) {
-        this.dataSource = dataSource;
+    public WebSecurityConfiguration(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 

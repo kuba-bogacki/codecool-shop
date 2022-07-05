@@ -8,25 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <title>Codecool Shop</title>
-
-    <!-- Bootstrap components -->
-    <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
-    <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <!-- End of Bootstrap components -->
-
     <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 
 </head>
@@ -52,7 +41,7 @@
             <img class="basket-image" src="/img/shopping_cart_icon.jpg" width="110" height="110" alt="" />
         </div>
     </a>
-    <a href="/"><h1>Codecool Shop</h1></a>
+    <a href="/"><h1>Codecool Tech Shop</h1></a>
 </div>
 
 <div id="product-modal" class="modal">
@@ -87,11 +76,25 @@
                             </a>
                         </div>
                         <div>
-                            <input type="number" th:value="${item.getQuantity()}" />
-                            <span> * </span>
-                            <span th:text="${item.getProduct().getDefaultPrice()}">Price</span>
-                            <span>=</span>
-                            <span class="h4 subtotal-amount" th:text="${item.getSubTotal()}">Subtotal</span>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link minusButton" href=""
+                                       th:pid="${item.getProduct().getProductId()}"><b>-</b></a>
+                                </li>
+                                <li class="page-item">
+                                    <input type="text" th:value="${item.getQuantity()}" class="form-control text-center"
+                                        onkeydown="return false;" style="max-width:50px"
+                                        th:id="'quantity' + ${item.getProduct().getProductId()}" />
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link plusButton" href=""
+                                       th:pid="${item.getProduct().getProductId()}"><b>+</b></a>
+                                </li>
+                                <span>  *  </span>
+                                <span class="h5" th:text="${item.getProduct().getDefaultPrice()}">Price</span>
+                                <span> = </span>
+                                <span class="h4 subtotal-amount" th:text="${item.getSubTotal()}">Subtotal</span>
+                            </ul>
                         </div>
                     </div>
                     <div class="row m-1 bread-crumbs">&nbsp;</div>

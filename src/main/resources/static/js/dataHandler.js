@@ -22,7 +22,6 @@ async function apiDelete(url) {
         method: "DELETE",
     });
     let data = await response.text();
-    console.log("działa" + data);
     return data;
 }
 

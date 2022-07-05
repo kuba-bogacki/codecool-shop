@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class CustomerServiceImplementation implements CustomerService {
 
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
     public CustomerServiceImplementation(CustomerRepository customerRepository) {
@@ -36,7 +36,6 @@ public class CustomerServiceImplementation implements CustomerService {
     @Override
     public Customer getCurrentlyLoggedInCustomer(Authentication authentication) {
         Customer customer = null;
-        System.out.println(authentication);
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof CustomCustomerDetails) {

@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class PayPalServiceImplementation implements PayPalService {
 
-    private APIContext apiContext;
+    private final APIContext apiContext;
 
     @Autowired
     public PayPalServiceImplementation(APIContext apiContext) {

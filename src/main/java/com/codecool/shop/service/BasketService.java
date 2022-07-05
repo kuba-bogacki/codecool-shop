@@ -9,4 +9,5 @@ public interface BasketService {
     List<Basket> listItemsInBasket(Customer customer);
     void addProductToBasket(Integer productId, Customer customer);
     void removeProductFromBasket(Integer productId, Customer customer);
+    void removeAllProductsFromBasket(Customer customer);
 }

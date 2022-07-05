@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class BasketController {
 
-    private BasketService basketService;
-    private CustomerService customerService;
+    private final BasketService basketService;
+    private final CustomerService customerService;
 
     @Autowired
     public BasketController(BasketService basketService, CustomerService customerService) {

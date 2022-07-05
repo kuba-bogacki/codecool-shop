@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class BasketServiceImplementation implements BasketService {
 
-    private BasketRepository basketRepository;
-    private ProductRepository productRepository;
+    private final BasketRepository basketRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public BasketServiceImplementation(BasketRepository basketRepository, ProductRepository productRepository) {
@@ -50,5 +50,11 @@ public class BasketServiceImplementation implements BasketService {
     @Transactional
     public void removeProductFromBasket(Integer productId, Customer customer) {
         basketRepository.deleteByProduct_ProductIdAndCustomer_CustomerId(productId, customer.getCustomerId());
+    }
+
+    @Override
+    @Transactional
+    public void removeAllProductsFromBasket(Customer customer) {
+        basketRepository.deleteByCustomer_CustomerId(customer.getCustomerId());
     }
 }

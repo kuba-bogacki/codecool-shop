@@ -8,11 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;

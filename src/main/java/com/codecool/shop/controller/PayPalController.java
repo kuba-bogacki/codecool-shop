@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PayPalController {
 
-    private PayPalService payPalService;
-    private CustomerService customerService;
-    private BasketService basketService;
-    private EmailService emailService;
+    private final PayPalService payPalService;
+    private final CustomerService customerService;
+    private final BasketService basketService;
+    private final EmailService emailService;
 
     @Autowired
     public PayPalController(PayPalService payPalService, CustomerService customerService,
@@ -69,13 +69,16 @@ public class PayPalController {
 
     @RequestMapping(value = "/pay/success", method = RequestMethod.GET)
     public String successPay(@RequestParam(name = "paymentId") String paymentId,
-                             @RequestParam(name = "PayerID") String payerId) {
+                             @RequestParam(name = "PayerID") String payerId,
+                             Authentication authentication) {
         String redirectToPage = "";
+        Customer customer = customerService.getCurrentlyLoggedInCustomer(authentication);
         try {
             Payment payment = payPalService.executePayment(paymentId, payerId);
             System.out.println(payment.toJSON());
             if (payment.getState().equals("approved")) {
                 emailService.sendEmail(payment);
+                basketService.removeAllProductsFromBasket(customer);
                 redirectToPage = "payment/success-payment";
             }
         } catch (PayPalRESTException e) {

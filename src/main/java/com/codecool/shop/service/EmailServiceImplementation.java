@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImplementation implements EmailService {
 
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     @Autowired
     public EmailServiceImplementation(JavaMailSender javaMailSender) {
@@ -33,5 +33,6 @@ public class EmailServiceImplementation implements EmailService {
                 "State: " + payment.getTransactions().get(0).getItemList().getShippingAddress().getState() + "\n" +
                 "Thanks for shopping, see you soon! :)");
         javaMailSender.send(emailMessage);
+        System.out.println("Email send successfully");
     }
 }

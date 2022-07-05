@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProductCategoryController {
 
-    private ProductCategoryService productCategoryService;
+    private final ProductCategoryService productCategoryService;
 
     public ProductCategoryController(ProductCategoryService productCategoryService) {
         this.productCategoryService = productCategoryService;
