@@ -11,11 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginCustomer() {
+        return "login-page";
+    }
+
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerCustomer(Model model) {

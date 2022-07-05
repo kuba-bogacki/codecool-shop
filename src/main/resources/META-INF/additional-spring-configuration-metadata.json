@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "paypal.mode",
+      "type": "java.lang.String",
+      "description": "sandbox"
+    },
+    {
+      "name": "paypal.client.id",
+      "type": "java.lang.String",
+      "description": "AbULGEg_4IHmI_-PshOagyFb1RTgTOSyUppHVJZdYQZmWvSC8UbqM7tafH7kvPyABwX6wyAx0h56aTgM"
+    },
+    {
+      "name": "paypal.secret.id",
+      "type": "java.lang.String",
+      "description": "EE1Kx9Eyb5gf5YfcpFiiEjWDE5ROgTCZ1nL3EU8qpaTDpto8sl9sn5F9KGS7tusUQvlbMr3aDxpzW4cZ"
+    }
+  ] }

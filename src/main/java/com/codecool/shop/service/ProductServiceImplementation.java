@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class ProductServiceImplementation implements ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public ProductServiceImplementation(ProductRepository productRepository) {

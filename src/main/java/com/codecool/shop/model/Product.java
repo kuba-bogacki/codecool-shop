@@ -13,7 +13,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1234567L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //dodawanie kolejnych id na poziomie tabeli
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
     private String productName;
     private double defaultPrice;

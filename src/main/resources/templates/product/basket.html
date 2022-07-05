@@ -8,25 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <title>Codecool Shop</title>
-
-    <!-- Bootstrap components -->
-    <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
-    <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-    <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <!-- End of Bootstrap components -->
-
     <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 
 </head>
@@ -34,11 +23,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" th:href="@{/register}">Register</a>
-            <a class="nav-item nav-link active" th:href="@{/login}">Login</a>
+        <div class="navbar-nav" sec:authorize="isAuthenticated()">
             <a class="nav-item nav-link active" th:href="@{/customers}">All Customers</a>
             <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
+        </div>
+        <div class="navbar-nav" sec:authorize="isAnonymous()">
+            <a class="nav-item nav-link active" th:href="@{/register}">Register</a>
+            <a class="nav-item nav-link active" th:href="@{/login}">Login</a>
         </div>
     </div>
     <div sec:authorize="isAuthenticated()">Login as <span sec:authentication="name"></span></div>
@@ -50,33 +41,86 @@
             <img class="basket-image" src="/img/shopping_cart_icon.jpg" width="110" height="110" alt="" />
         </div>
     </a>
-    <a href="/"><h1>Codecool Shop</h1></a>
+    <a href="/"><h1>Codecool Tech Shop</h1></a>
 </div>
 
-<div class="container text-center">
-    <div>
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <p class="modal-text"></p>
+        <button class="close btn-danger">Ok</button>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="text-center">
         <h1>List of Products</h1>
     </div>
-    <div>
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row m-1">
+        <div class="col-sm-8">
+            <th:block th:each="item, status: ${itemsList}">
+                <div class="row border rounded">
+                    <div class="col-1">
+                        <img class="delete-icon" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/img/trash_bin.jpg', data-product-id=${item.getProduct().getProductId()}"
+                             width="20" height="25"/>
+                    </div>
+                    <div class="col-3">
+                        <img src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/img/product_' + ${item.getProduct().getProductId()} + '.jpg'"
+                             width="140" height="90"/>
+                    </div>
+                    <div class="col-6">
+                        <div>
+                            <a>
+                                <h5 th:text="${item.getProduct().getProductName()}">Product Name</h5>
+                            </a>
+                        </div>
+                        <div>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link minusButton" href=""
+                                       th:pid="${item.getProduct().getProductId()}"><b>-</b></a>
+                                </li>
+                                <li class="page-item">
+                                    <input type="text" th:value="${item.getQuantity()}" class="form-control text-center"
+                                        onkeydown="return false;" style="max-width:50px"
+                                        th:id="'quantity' + ${item.getProduct().getProductId()}" />
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link plusButton" href=""
+                                       th:pid="${item.getProduct().getProductId()}"><b>+</b></a>
+                                </li>
+                                <span>  *  </span>
+                                <span class="h5" th:text="${item.getProduct().getDefaultPrice()}">Price</span>
+                                <span> = </span>
+                                <span class="h4 subtotal-amount" th:text="${item.getSubTotal()}">Subtotal</span>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row m-1 bread-crumbs">&nbsp;</div>
+                </div>
+            </th:block>
+        </div>
+
+        <div class="col-sm-4">
+            <div>
+                <span class="h3">Estimated total:</span>
+            </div>
+            <div class="mt-2">
+                <span class="h2 total-amount">Total amount</span>
+            </div>
+            <div class="mt-2">
+                <a class="redirect-to-order" th:href="@{/order}">
+                    <button class="btn btn-success p-3 mt-2">Buy now</button>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
+<script type="text/javascript" src="/js/dataHandler.js"></script>
 <script type="text/javascript" src="/js/basketData.js"></script>
+<script type="text/javascript" src="/js/mainBasket.js"></script>
+
 </body>
 </html>

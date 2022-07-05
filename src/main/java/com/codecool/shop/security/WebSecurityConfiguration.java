@@ -18,12 +18,10 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private DataSource dataSource;
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public WebSecurityConfiguration(DataSource dataSource, CustomerRepository customerRepository) {
-        this.dataSource = dataSource;
+    public WebSecurityConfiguration(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
@@ -53,19 +51,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/customers")
-                .authenticated()
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/show-basket", "/customers").hasAnyAuthority("ROLE_USER")
                 .anyRequest()
                 .permitAll()
                 .and()
                 .formLogin()
-                .usernameParameter("customerEmail")
-                .defaultSuccessUrl("/")
+                .loginPage("/login")
+                .usernameParameter("email")
                 .permitAll()
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
-                .permitAll();
+                .permitAll()
+                .and()
+                .rememberMe();
     }
 }
